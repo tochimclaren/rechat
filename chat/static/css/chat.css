@@ -1,0 +1,93 @@
+html, body{
+    max-height: 100%;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 2px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+#users{
+    overflow-y: scroll;
+    max-height:100%;
+    min-height:100%;
+}
+#wrapper{
+    background: url("") 100% 0 no-repeat;
+    max-width:  50vw;
+    max-height: 35vw;
+    min-height: 40vw;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    transform: rotate(180deg);
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+
+#content{
+overflow: hidden;
+transform: rotate(180deg);
+}
+
+#upload>input {
+    display: none;
+}
+
+#attachment:hover{
+    border: 1px solid rgb(69, 72, 72);
+    border-radius: .3rem;
+}
+
+@media only screen and (max-width: 700px) {
+    #wrapper{
+        min-width:  100vw;
+        max-height: 100vw;
+        min-height: 100vw;
+        transform: rotate(180deg);
+        margin-bottom: 1rem;
+        position: relative;
+    }
+    
+    #users{
+        display: none;
+    }
+    #profile{
+        display: none;
+    }
+  }
+
+
+.username{
+    cursor: pointer;
+}
+
+
+.reciever {
+	background: #00aabb;
+	border-radius: .4em;
+    padding: .5rem;
+}
+
+
+.sender {
+	background: #ffffff;
+	border-radius: .4em;
+    padding: .5rem;
+    
+}

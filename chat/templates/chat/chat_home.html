@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid">
+    {% comment %} <h3 class="text-center mb-5">re - Chat!</h3> {% endcomment %}
+    <div class="row">
+        <div class="col-lg-1 col-sm-1 col-md-1 border-end my-2" id="profile">
+            <!-- <button class="btn btn-dark m-auto">x</button> -->
+            <img class="img-fluid mx-auto border" src="{% static 'images/user.jpg'%}" alt="User profile">
+            <ul class="list-unstyled p-1">
+                <li><a href="">Account</a></li>
+                <li><a href="">Settings</a></li>
+                <li><a href="">About</a></li>
+            </ul>
+        </div>
+        <div class="col-lg-3 col-sm-2 col-md-2 border-end h-100 friends-list my-2" id="users">
+            <h6 class="p-4 border text-center">Friends List</h6>
+            <form action="" class="mx-auto">
+                <input type="search" name="filter" id="filter" placeholder="Search users" class="form-control mb-2 rounded-0">
+            </form>
+            <ul class="list-group">
+                {% for contact in contacts %}
+                {% for friend in contact.friends.all %}
+                <li class="list-group-item rounded-0 p-2 username" data-user-id={{friend.id}}>
+                    {{friend.username|capfirst}}
+                    <div>
+                        <span class="text-muted">Offline</span><br>
+                        <span class="text-muted">2 hours ago</span>
+                    </div>
+                </li>
+                {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="border-1 my-4 p-3 bg-dark align-items-end" id="wrapper">
+                <!-- <h4 class="h4 p-4 border rounded-2 text-white text-center">Messages</h4> -->
+                <div id="content">
+                </div>
+            </div>
+            <form id="chat_form" method="post" class="chat-form" enctype="multipart/form-data">
+                <fieldset disabled="disabled" id="myFieldSet">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-lg-10 col-md-10 col-sm-12">
+                        <div class="form-floating">
+                            <input class="form-control" id="floatingTextarea" name='message'>
+                            <label for="floatingTextarea" class="text-muted"></label>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-2 mt-auto" id="upload">
+                        <label for="file-input">
+                            <img class="img-fluid img-thumbnail p-0" id="attachment" width="38" height="38"
+                                src="{% static 'images/attach.png' %}" />
+                        </label>
+                        <input class="form-control" type="file" id="file-input" name='file'>
+                    </div>
+                    <div class="col-lg-2 col-md-2 my-2">
+                        <input class="btn btn-dark" type="submit">
+                    </div>
+                </div>
+             </fieldset>
+            </form>
+
+        </div>
+    </div>
+    {% endblock %}
+
+
+    {% block js %}
+    <input type="hidden" id="current-user" data-current-user={{request.user.username}}>
+    <input type="hidden" id="other-user" data-other-user="">
+    <script src="{% static 'js/moment.min.js' %}"></script>
+    <script src="{% static 'js/chat.js' %}"></script>
+    {% endblock %}
